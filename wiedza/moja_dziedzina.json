@@ -1,0 +1,197 @@
+{
+  "nazwa": "System doboru laptopa roboczego i studenckiego",
+  "cel": "laptop",
+  "atrybuty": {
+    "budzet": {
+      "typ": "liczba",
+      "pytanie": "Jaki jest Twoj maksymalny budżet na zakup laptopa (w PLN)?",
+      "zakres": [2000, 12000]
+    },
+    "zastosowanie": {
+      "typ": "wybor",
+      "pytanie": "Jakie jest główne zastosowanie sprzętu?",
+      "wartosci": ["biuro_studia", "programowanie", "grafika_3d"]
+    },
+    "mobilnosc": {
+      "typ": "wybor",
+      "pytanie": "Czy wymagana jest wysoka mobilność sprzętu?",
+      "wartosci": ["wysoka", "stacjonarna"]
+    },
+    "system_os": {
+      "typ": "wybor",
+      "pytanie": "Jaki jest preferowany system operacyjny?",
+      "wartosci": ["Windows", "macOS", "Linux"]
+    },
+    "klasa_sprzetu": {
+      "typ": "wniosek",
+      "wartosci": ["budzetowa", "srednia", "premium"]
+    },
+    "laptop": {
+      "typ": "wniosek",
+      "wartosci": [
+        "ACER_SWIFT_3",
+        "LENOVO_IDEAPAD_3",
+        "APPLE_MACBOOK_AIR_M1",
+        "ASUS_ZENBOOK_14",
+        "APPLE_MACBOOK_AIR_M2",
+        "DELL_VOSTRO_3520",
+        "HP_250_G9",
+        "LENOVO_THINKPAD_E14",
+        "DELL_LATITUDE_5540",
+        "APPLE_MACBOOK_PRO_14",
+        "DELL_XPS_13",
+        "THINKPAD_P14S",
+        "ACER_ASPIRE_7",
+        "ASUS_ROG_ZEPHYRUS_G14",
+        "LENOVO_LEGION_SLIM_5",
+        "ASUS_PROART_STUDIOBOOK"
+      ]
+    }
+  },
+ "reguly": [
+    {
+      "id": "P1",
+      "jesli": [["budzet", "<", 3500]],
+      "to": ["klasa_sprzetu", "budzetowa"],
+      "metafora": "Budżet poniżej 3500 PLN ogranicza wybór do segmentu podstawowego o ekonomicznej specyfikacji."
+    },
+    {
+      "id": "P2",
+      "jesli": [["budzet", ">=", 3500], ["budzet", "<", 6500]],
+      "to": ["klasa_sprzetu", "srednia"],
+      "metafora": "Budżet od 3500 do 6499 PLN pozwala na wybór solidnej średniej półki z lepszą matrycą i wykonaniem."
+    },
+    {
+      "id": "P3",
+      "jesli": [["budzet", ">=", 6500]],
+      "to": ["klasa_sprzetu", "premium"],
+      "metafora": "Budżet od 6500 PLN wzwyż otwiera dostęp do flagowych ultrabooków i mobilnych stacji roboczych."
+    },
+    {
+      "id": "R0",
+      "jesli": [["zastosowanie", "==", "grafika_3d"], ["klasa_sprzetu", "==", "premium"], ["system_os", "==", "macOS"]],
+      "to": ["laptop", "APPLE_MACBOOK_PRO_14"],
+      "metafora": "Wyjątek systemowy: gdy twórca 3D w segmencie premium wymaga ekosystemu macOS, priorytet ma stacja Apple przed ogólną rekomendacją Windows (R16).",
+      "coto": "Apple MacBook Pro 14 — wydajna stacja robocza z układem Apple Silicon Pro/Max, szybkim GPU i ekranem Liquid Retina XDR."
+    },
+    {
+      "id": "R1",
+      "jesli": [["zastosowanie", "==", "biuro_studia"], ["klasa_sprzetu", "==", "budzetowa"], ["mobilnosc", "==", "wysoka"]],
+      "to": ["laptop", "ACER_SWIFT_3"],
+      "metafora": "Przy niskim budżecie i częstym noszeniu sprzętu na uczelnię kluczowa jest niska masa oraz długi czas pracy na baterii.",
+      "coto": "Acer Swift 3 — lekki, kompaktowy ultrabook 14 cali z aluminiową obudową i energooszczędnym procesorem."
+    },
+    {
+      "id": "R2",
+      "jesli": [["zastosowanie", "==", "biuro_studia"], ["klasa_sprzetu", "==", "budzetowa"], ["mobilnosc", "==", "stacjonarna"]],
+      "to": ["laptop", "LENOVO_IDEAPAD_3"],
+      "metafora": "Gdy laptop rzadko opuszcza biurko, w niskim budżecie bardziej opłaca się większa przekątna ekranu niż ultralekka konstrukcja.",
+      "coto": "Lenovo IdeaPad 3 — klasyczny notebook 15,6 cala z wygodną klawiaturą numeryczną do nauki i pracy biurowej."
+    },
+    {
+      "id": "R3",
+      "jesli": [["zastosowanie", "==", "biuro_studia"], ["klasa_sprzetu", "==", "srednia"], ["system_os", "==", "macOS"]],
+      "to": ["laptop", "APPLE_MACBOOK_AIR_M1"],
+      "metafora": "W średnim budżecie biurowym wybór macOS gwarantuje bezgłośną pracę bez wentylatorów i wielogodzinną pracę bez ładowarki.",
+      "coto": "Apple MacBook Air M1 — smukły ultrabook z procesorem ARM M1, pasywnym chłodzeniem i ekranem Retina."
+    },
+    {
+      "id": "R4",
+      "jesli": [["zastosowanie", "==", "biuro_studia"], ["klasa_sprzetu", "==", "srednia"], ["system_os", "==", "Windows"]],
+      "to": ["laptop", "ASUS_ZENBOOK_14"],
+      "metafora": "W średniej półce z systemem Windows najlepszy komfort pracy z tekstem i arkuszami daje lekka obudowa połączona z ekranem OLED.",
+      "coto": "Asus Zenbook 14 — elegancki, smukły ultrabook z matrycą OLED o wysokim kontraście i solidną baterią."
+    },
+    {
+      "id": "R5",
+      "jesli": [["zastosowanie", "==", "biuro_studia"], ["klasa_sprzetu", "==", "premium"]],
+      "to": ["laptop", "APPLE_MACBOOK_AIR_M2"],
+      "metafora": "W zastosowaniach biurowych klasy premium nie ma potrzeby dopłacać za ciężkie stacje robocze — liczy się maksymalna kultura pracy i mobilność.",
+      "coto": "Apple MacBook Air M2 — nowoczesny ultrabook klasy premium z układem M2 i wyświetlaczem Liquid Retina."
+    },
+    {
+      "id": "R6",
+      "jesli": [["zastosowanie", "==", "programowanie"], ["klasa_sprzetu", "==", "budzetowa"], ["system_os", "==", "Linux"]],
+      "to": ["laptop", "DELL_VOSTRO_3520"],
+      "metafora": "Tani laptop programistyczny pod Linuksa wymaga pełnego wsparcia sterowników dla karty sieciowej i podzespołów.",
+      "coto": "Dell Vostro 3520 — biznesowy notebook 15,6 cala z matową matrycą 120 Hz i dobrą kompatybilnością z dystrybucjami Linuksa."
+    },
+    {
+      "id": "R7",
+      "jesli": [["zastosowanie", "==", "programowanie"], ["klasa_sprzetu", "==", "budzetowa"], ["system_os", "==", "Windows"]],
+      "to": ["laptop", "HP_250_G9"],
+      "metafora": "Przy ograniczonym budżecie i środowisku Windows priorytetem jest wielordzeniowy procesor do sprawnej kompilacji kodu.",
+      "coto": "HP 250 G9 — ekonomiczny laptop roboczy z procesorem Intel Core i5 i możliwością rozbudowy pamięci RAM."
+    },
+    {
+      "id": "R8",
+      "jesli": [["zastosowanie", "==", "programowanie"], ["klasa_sprzetu", "==", "srednia"], ["mobilnosc", "==", "wysoka"]],
+      "to": ["laptop", "LENOVO_THINKPAD_E14"],
+      "metafora": "Programista pracujący w podróży potrzebuje wytrzymałej obudowy i ergonomicznej klawiatury do wielogodzinnego pisania kodu.",
+      "coto": "Lenovo ThinkPad E14 — kompaktowy laptop biznesowy o podwyższonej odporności (MIL-STD-810H) z precyzyjną klawiaturą."
+    },
+    {
+      "id": "R9",
+      "jesli": [["zastosowanie", "==", "programowanie"], ["klasa_sprzetu", "==", "srednia"], ["mobilnosc", "==", "stacjonarna"]],
+      "to": ["laptop", "DELL_LATITUDE_5540"],
+      "metafora": "Stacjonarna praca programisty wymaga rozbudowanego zestawu złączy pod zewnętrzne monitory i łatwej rozbudowy pamięci pod kontenery.",
+      "coto": "Dell Latitude 5540 — wydajny laptop inżynieryjny 15,6 cala z bogatym zestawem portów i dwoma slotami RAM."
+    },
+    {
+      "id": "R10",
+      "jesli": [["zastosowanie", "==", "programowanie"], ["klasa_sprzetu", "==", "premium"], ["system_os", "==", "macOS"]],
+      "to": ["laptop", "APPLE_MACBOOK_PRO_14"],
+      "metafora": "W segmencie premium system macOS zapewnia natywne środowisko uniksowe, bardzo szybką kompilację i bezkonkurencyjną wydajność na baterii.",
+      "coto": "Apple MacBook Pro 14 — profesjonalna stacja robocza z układem M-series Pro/Max, aktywnym chłodzeniem i ekranem XDR."
+    },
+    {
+      "id": "R11",
+      "jesli": [["zastosowanie", "==", "programowanie"], ["klasa_sprzetu", "==", "premium"], ["system_os", "==", "Windows"]],
+      "to": ["laptop", "DELL_XPS_13"],
+      "metafora": "Dla programisty w ekosystemie Windows klasy premium kluczowa jest wysoka wydajność obliczeniowa zamknięta w kompaktowej obudowie.",
+      "coto": "Dell XPS 13 — flagowy, bezramkowy ultrabook z procesorem wysokiej wydajności i ekranem o proporcjach 16:10."
+    },
+    {
+      "id": "R12",
+      "jesli": [["zastosowanie", "==", "programowanie"], ["klasa_sprzetu", "==", "premium"], ["system_os", "==", "Linux"]],
+      "to": ["laptop", "THINKPAD_P14S"],
+      "metafora": "Profesjonalna praca pod Linuksem w segmencie premium uzasadnia wybór stacji roboczej z oficjalną certyfikacją producentów dystrybucji.",
+      "coto": "Lenovo ThinkPad P14s — mobilna stacja robocza z certyfikacją Ubuntu i Red Hat oraz wydajnym układem chłodzenia."
+    },
+    {
+      "id": "R13",
+      "jesli": [["zastosowanie", "==", "grafika_3d"], ["klasa_sprzetu", "==", "budzetowa"]],
+      "to": ["laptop", "ACER_ASPIRE_7"],
+      "metafora": "Praca z grafiką 3D wymaga dedykowanej karty graficznej — w najniższym progu cenowym wygrywa konstrukcja oferująca układ GeForce RTX.",
+      "coto": "Acer Aspire 7 — przystępny cenowo laptop z dedykowaną kartą graficzną NVIDIA GeForce RTX do podstawowego modelowania 3D."
+    },
+    {
+      "id": "R14",
+      "jesli": [["zastosowanie", "==", "grafika_3d"], ["klasa_sprzetu", "==", "srednia"], ["mobilnosc", "==", "wysoka"]],
+      "to": ["laptop", "ASUS_ROG_ZEPHYRUS_G14"],
+      "metafora": "Połączenie renderingu 3D i wysokiej mobilności w średnim budżecie wymusza wybór kompaktowej konstrukcji 14 cali z mocnym GPU.",
+      "coto": "Asus ROG Zephyrus G14 — lekki, 14-calowy laptop z matrycą OLED i wydajnym układem graficznym NVIDIA RTX."
+    },
+    {
+      "id": "R15",
+      "jesli": [["zastosowanie", "==", "grafika_3d"], ["klasa_sprzetu", "==", "srednia"], ["mobilnosc", "==", "stacjonarna"]],
+      "to": ["laptop", "LENOVO_LEGION_SLIM_5"],
+      "metafora": "Gdy grafik pracuje głównie przy biurku, większa obudowa pozwala na wyższy limit mocy karty graficznej (TGP) i cichsze chłodzenie.",
+      "coto": "Lenovo Legion Slim 5 — wydajny laptop 16 cali z rozbudowanym układem chłodzenia i kartą RTX o wysokim TGP."
+    },
+    {
+      "id": "R16",
+      "jesli": [["zastosowanie", "==", "grafika_3d"], ["klasa_sprzetu", "==", "premium"]],
+      "to": ["laptop", "ASUS_PROART_STUDIOBOOK"],
+      "metafora": "W segmencie premium do grafiki 3D najważniejsza jest fabryczna kalibracja barw ekranu oraz stabilne sterowniki NVIDIA Studio.",
+      "coto": "Asus ProArt Studiobook — profesjonalna stacja robocza dla twórców 3D z kalibrowanym ekranem OLED i fizycznym kontrolerem ASUS Dial."
+    },
+    {
+      "id": "R17_LINUX_SREDNIA",
+      "jesli": [["zastosowanie", "==", "biuro_studia"], ["klasa_sprzetu", "==", "srednia"], ["system_os", "==", "Linux"]],
+      "to": ["laptop", "LENOVO_THINKPAD_E14"],
+      "metafora": "Użytkownik biurowy korzystający z Linuksa w średnim budżecie potrzebuje sprzętu o bezproblemowej obsłudze jądra i solidnej klawiaturze.",
+      "coto": "Lenovo ThinkPad E14 — biznesowy ultrabook zapewniający pełną stabilność działania pod kontrolą systemów Linux."
+    }
+  ]
+}

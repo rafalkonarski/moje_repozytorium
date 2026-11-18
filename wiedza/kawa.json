@@ -1,0 +1,157 @@
+{
+  "nazwa": "Dobór kawy",
+  "cel": "kawa",
+  "atrybuty": {
+    "temperatura": {
+      "typ": "liczba",
+      "pytanie": "Jaka jest temperatura (°C)?",
+      "zakres": [-30, 45]
+    },
+    "pora_dnia": {
+      "typ": "wybor",
+      "pytanie": "Jaka jest pora dnia?",
+      "wartosci": ["rano", "popołudnie", "wieczór"]
+    },
+    "dodatek": {
+      "typ": "wybor",
+      "pytanie": "Jaki dodatek?",
+      "wartosci": ["mleko", "czekolada", "brak"]
+    },
+    "kofeina_ok": {
+      "typ": "wybor",
+      "pytanie": "Czy możesz pić kofeinę?",
+      "wartosci": ["tak", "nie"]
+    },
+    "rodzaj_kawy": {
+      "typ": "wniosek",
+      "wartosci": ["zimna", "gorąca"]
+    },
+    "moc": {
+      "typ": "wniosek",
+      "wartosci": ["mocna", "normalna", "bezkofeinowa"]
+    },
+    "kawa": {
+      "typ": "wniosek",
+      "wartosci": [
+        "mrożona kawa bezkofeinowa",
+        "latte bezkofeinowe",
+        "chocolate cold coffee",
+        "iced latte",
+        "cold brew",
+        "mocha",
+        "cappuccino",
+        "latte",
+        "espresso",
+        "americano"
+      ]
+    }
+  },
+  "reguly": [
+    {
+      "id": "R1",
+      "jesli": [["temperatura", ">", 22]],
+      "to": ["rodzaj_kawy", "zimna"],
+      "metafora": "Jest ciepło, więc kawa na zimno."
+    },
+    {
+      "id": "R2",
+      "jesli": [["temperatura", "<=", 22]],
+      "to": ["rodzaj_kawy", "gorąca"],
+      "metafora": "Chłodniej na zewnątrz, więc lepsza będzie kawa na gorąco."
+    },
+    {
+      "id": "R3",
+      "jesli": [["kofeina_ok", "==", "nie"]],
+      "to": ["moc", "bezkofeinowa"],
+      "metafora": "Brak zgody na kofeinę wymusza wariant bezkofeinowy."
+    },
+    {
+      "id": "R4",
+      "jesli": [["kofeina_ok", "==", "tak"], ["pora_dnia", "==", "rano"]],
+      "to": ["moc", "mocna"],
+      "metafora": "Rano potrzebne jest mocniejsze pobudzenie."
+    },
+    {
+      "id": "R5",
+      "jesli": [["kofeina_ok", "==", "tak"], ["pora_dnia", "==", "popołudnie"]],
+      "to": ["moc", "normalna"],
+      "metafora": "W ciągu dnia optymalna jest standardowa dawka kofeiny."
+    },
+    {
+      "id": "R6",
+      "jesli": [["pora_dnia", "==", "wieczór"]],
+      "to": ["moc", "bezkofeinowa"],
+      "metafora": "Wieczorem lepiej unikać kofeiny przed snem."
+    },
+    {
+      "id": "R7",
+      "jesli": [["rodzaj_kawy", "==", "zimna"], ["moc", "==", "bezkofeinowa"]],
+      "to": ["kawa", "mrożona kawa bezkofeinowa"],
+      "metafora": "Chłodzące orzeźwienie bez kofeiny.",
+      "coto": "Kawa mrożona przygotowana na bazie ziaren bezkofeinowych."
+    },
+    {
+      "id": "R8",
+      "jesli": [["rodzaj_kawy", "==", "gorąca"], ["moc", "==", "bezkofeinowa"]],
+      "to": ["kawa", "latte bezkofeinowe"],
+      "metafora": "Łagodna, ciepła kawa mleczna bez kofeiny.",
+      "coto": "Gorące latte na bazie espresso bezkofeinowego."
+    },
+    {
+      "id": "R9",
+      "jesli": [["rodzaj_kawy", "==", "zimna"], ["dodatek", "==", "czekolada"]],
+      "to": ["kawa", "chocolate cold coffee"],
+      "metafora": "Na zimno i z czekoladą.",
+      "coto": "Schłodzona kawa z czekoladą."
+    },
+    {
+      "id": "R10",
+      "jesli": [["rodzaj_kawy", "==", "zimna"], ["dodatek", "==", "mleko"]],
+      "to": ["kawa", "iced latte"],
+      "metafora": "Zimna kawa złagodzona mlekiem.",
+      "coto": "Espresso podane z zimnym mlekiem i kostkami lodu."
+    },
+    {
+      "id": "R11",
+      "jesli": [["rodzaj_kawy", "==", "zimna"], ["dodatek", "==", "brak"]],
+      "to": ["kawa", "cold brew"],
+      "metafora": "Czysta, orzeźwiająca kawa parzona na zimno.",
+      "coto": "Kawa macerowana w zimnej wodzie przez kilkanaście godzin."
+    },
+    {
+      "id": "R12",
+      "jesli": [["rodzaj_kawy", "==", "gorąca"], ["dodatek", "==", "czekolada"]],
+      "to": ["kawa", "mocha"],
+      "metafora": "Połączenie gorącej kawy i czekolady.",
+      "coto": "Kawa mleczna z dodatkiem gorącej czekolady."
+    },
+    {
+      "id": "R13",
+      "jesli": [["rodzaj_kawy", "==", "gorąca"], ["dodatek", "==", "mleko"], ["moc", "==", "mocna"]],
+      "to": ["kawa", "cappuccino"],
+      "metafora": "Wyrazista kawa z gęstą mleczną pianką.",
+      "coto": "Espresso z gorącym, spienionym mlekiem."
+    },
+    {
+      "id": "R14",
+      "jesli": [["rodzaj_kawy", "==", "gorąca"], ["dodatek", "==", "mleko"]],
+      "to": ["kawa", "latte"],
+      "metafora": "Delikatna, duża kawa mleczna.",
+      "coto": "Espresso z dużą ilością ciepłego mleka."
+    },
+    {
+      "id": "R15",
+      "jesli": [["rodzaj_kawy", "==", "gorąca"], ["dodatek", "==", "brak"], ["moc", "==", "mocna"]],
+      "to": ["kawa", "espresso"],
+      "metafora": "Czysta esencja kawy o maksymalnej intensywności.",
+      "coto": "Mała, bardzo intensywna czarna kawa parzona pod ciśnieniem."
+    },
+    {
+      "id": "R16",
+      "jesli": [["rodzaj_kawy", "==", "gorąca"], ["dodatek", "==", "brak"]],
+      "to": ["kawa", "americano"],
+      "metafora": "Klasyczna czarna kawa bez dodatków.",
+      "coto": "Espresso przedłużone gorącą wodą."
+    }
+  ]
+}
