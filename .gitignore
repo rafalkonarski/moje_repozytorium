@@ -1,6 +1,4 @@
 *.docx
 *.pdf
 ~$*
-*.docx
-*.pdf
-~$*
+__pycache__/
