@@ -45,3 +45,21 @@ if wyslano:
     with st.expander("Jak do tego doszedłem?"):
         for krok in wyjasnij_jak(baza, slad):
             st.text(krok)
+
+    # raport do pobrania: dane, wynik, wyjaśnienie „jak?” i weryfikacja bazy
+    tekst = [
+        f"Raport konsultacji — {baza['nazwa']}",
+        "",
+        "Dane wejściowe:",
+        *[f"  {nazwa}: {wartosc}" for nazwa, wartosc in fakty.items()],
+        "",
+        f"Wynik: {cel if cel is not None else 'brak rekomendacji'}",
+        f"Co to jest? {coto(baza, slad) or '-'}",
+        "",
+        "Jak do tego doszedłem?",
+        *wyjasnij_jak(baza, slad),
+        "",
+        "Weryfikacja bazy wiedzy:",
+        *([f"  [{poziom}] {komunikat}" for poziom, komunikat in raport] or ["  Nie wykryto problemów."]),
+    ]
+    st.download_button("Pobierz raport", "\n".join(tekst), file_name="raport.txt")
