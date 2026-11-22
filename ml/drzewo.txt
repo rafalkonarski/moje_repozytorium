@@ -1,0 +1,49 @@
+|--- budzet <= 6450.0
+|   |--- zastosowanie_grafika_3d <= 0.5
+|   |   |--- budzet <= 3450.0
+|   |   |   |--- zastosowanie_biuro_studia <= 0.5
+|   |   |   |   |--- system_os_Windows <= 0.5
+|   |   |   |   |   |--- class: DELL_VOSTRO_3520
+|   |   |   |   |--- system_os_Windows >  0.5
+|   |   |   |   |   |--- class: HP_250_G9
+|   |   |   |--- zastosowanie_biuro_studia >  0.5
+|   |   |   |   |--- mobilnosc_stacjonarna <= 0.5
+|   |   |   |   |   |--- class: ACER_SWIFT_3
+|   |   |   |   |--- mobilnosc_stacjonarna >  0.5
+|   |   |   |   |   |--- class: LENOVO_IDEAPAD_3
+|   |   |--- budzet >  3450.0
+|   |   |   |--- zastosowanie_programowanie <= 0.5
+|   |   |   |   |--- system_os_Linux <= 0.5
+|   |   |   |   |   |--- system_os_macOS <= 0.5
+|   |   |   |   |   |   |--- class: ASUS_ZENBOOK_14
+|   |   |   |   |   |--- system_os_macOS >  0.5
+|   |   |   |   |   |   |--- class: APPLE_MACBOOK_AIR_M1
+|   |   |   |   |--- system_os_Linux >  0.5
+|   |   |   |   |   |--- class: LENOVO_THINKPAD_E14
+|   |   |   |--- zastosowanie_programowanie >  0.5
+|   |   |   |   |--- mobilnosc_wysoka <= 0.5
+|   |   |   |   |   |--- class: DELL_LATITUDE_5540
+|   |   |   |   |--- mobilnosc_wysoka >  0.5
+|   |   |   |   |   |--- class: LENOVO_THINKPAD_E14
+|   |--- zastosowanie_grafika_3d >  0.5
+|   |   |--- budzet <= 3450.0
+|   |   |   |--- class: ACER_ASPIRE_7
+|   |   |--- budzet >  3450.0
+|   |   |   |--- mobilnosc_stacjonarna <= 0.5
+|   |   |   |   |--- class: ASUS_ROG_ZEPHYRUS_G14
+|   |   |   |--- mobilnosc_stacjonarna >  0.5
+|   |   |   |   |--- class: LENOVO_LEGION_SLIM_5
+|--- budzet >  6450.0
+|   |--- zastosowanie_biuro_studia <= 0.5
+|   |   |--- system_os_macOS <= 0.5
+|   |   |   |--- zastosowanie_grafika_3d <= 0.5
+|   |   |   |   |--- system_os_Windows <= 0.5
+|   |   |   |   |   |--- class: THINKPAD_P14S
+|   |   |   |   |--- system_os_Windows >  0.5
+|   |   |   |   |   |--- class: DELL_XPS_13
+|   |   |   |--- zastosowanie_grafika_3d >  0.5
+|   |   |   |   |--- class: ASUS_PROART_STUDIOBOOK
+|   |   |--- system_os_macOS >  0.5
+|   |   |   |--- class: APPLE_MACBOOK_PRO_14
+|   |--- zastosowanie_biuro_studia >  0.5
+|   |   |--- class: APPLE_MACBOOK_AIR_M2

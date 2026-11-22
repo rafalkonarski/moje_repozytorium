@@ -64,3 +64,46 @@ Czego weryfikator nie wykrywa w tej bazie:
 ```
 python -m streamlit run app.py
 ```
+
+## Dane i drzewo decyzyjne (Z4)
+
+```
+python ml/generator.py   # ml/dane.csv, ml/luki.json, ml/metadane.json
+python ml/podzial.py     # ml/podzial.json (identyfikatory testu, zamknięty do Z6)
+python ml/trening.py     # ml/drzewo.txt, ml/drzewo.png
+```
+
+Wymagane pakiety: `numpy pandas scikit-learn matplotlib`.
+
+**Dane.** Generator losuje 2000 wejść (ziarno 42): budżet równomiernie z 2000–12000 PLN co 100 PLN,
+zastosowanie, mobilność i system równomiernie z wartości w bazie. Etykietę `laptop` ustala silnik
+(`wnioskuj_w_przod`), `label_source = rule_engine`, bez szumu. Wynik: 1970 wierszy, 1200 unikalnych
+wejść, 16 klas (najmniejsza: DELL_VOSTRO_3520 — 25 przypadków, 16 unikalnych wejść). 30 losowań bez
+decyzji trafiło do `ml/luki.json` — wszystkie to znana luka: programowanie + macOS + budżet < 3500 PLN.
+
+**X i y.** X = `budzet, zastosowanie, mobilnosc, system_os` (tylko dane od użytkownika).
+Wniosek pośredni `klasa_sprzetu`, `sample_id` i `label_source` nie trafiają do X (przeciek).
+
+**Podział.** `StratifiedGroupKFold(5, shuffle=True, random_state=42)`, fold 0 = test (394 przypadki,
+20%), trening 1576. Grupa = identyczna kombinacja wejść, więc powtórzenia są zawsze w jednej części.
+Każda klasa ma przypadki w obu częściach (min. 5 w teście).
+
+**Drzewo.** `Pipeline(OneHotEncoder(handle_unknown="ignore") na cechach symbolicznych, budżet bez zmian
+→ DecisionTreeClassifier(criterion="entropy", max_depth=8, random_state=42))`, `fit` tylko na treningu.
+Wynik: głębokość 6, 17 liści, korzeń `budzet <= 6450`, zgodność z etykietami silnika na treningu 100%.
+
+### Drzewo a reguły eksperta
+
+| Nr | Fragment drzewa (`drzewo.txt`) | Reguła eksperta | Zgodność | Wyjaśnienie |
+|---|---|---|---|---|
+| 1 | korzeń `budzet <= 6450` oraz `budzet <= 3450` | P3: `budzet >= 6500` → premium; P1: `budzet < 3500` → budżetowa | zgodne na danych | Drzewo znalazło oba progi klasy sprzętu, choć `klasa_sprzetu` nie była cechą. Próg leży w połowie między 6400 a 6500 (3400 a 3500), bo budżet losowano co 100 PLN; dla kwot spoza siatki (np. 3470 PLN) drzewo da klasę średnią, a reguła budżetową. |
+| 2 | `budzet > 6450`, nie biuro, `system_os_macOS > 0.5` → APPLE_MACBOOK_PRO_14 | R0 (grafika 3D + premium + macOS) i R10 (programowanie + premium + macOS) | zgodne, inna struktura | Drzewo scaliło dwie reguły z tym samym wnioskiem w jeden liść i sprawdza system przed zastosowaniem. Wyjątek R0 przed R16 jest zachowany: ProArt dostaje tylko grafika 3D bez macOS. |
+| 3 | `budzet <= 3450`, programowanie, `system_os_Windows <= 0.5` → DELL_VOSTRO_3520 | R6: programowanie + budżetowa + **Linux** → DELL_VOSTRO_3520 | częściowo | Drzewo nie widziało przypadków z macOS (luka, brak etykiety), więc nie potrzebowało pytania o Linuksa. Dla programowanie + macOS + budżet < 3500 drzewo poleci Della Vostro, a silnik nie daje decyzji — model „zapełnia” lukę bez wiedzy eksperta. |
+
+**Co to mierzy.** Etykiety pochodzą z silnika, więc 100% zgodności oznacza tylko, że drzewo
+odtwarza reguły na wylosowanych danych. Nie mówi nic o trafności rekomendacji laptopów (to wymagałoby
+etykiet od eksperta). Zbiór testowy nie był używany — ocena na nim dopiero w Z6.
+
+**Ograniczenia.** Progi budżetu zależą od siatki próbkowania (co 100 PLN); drzewo zachowuje się inaczej
+niż reguły w lukach pokrycia; bez szumu etykiet drzewo jest „czyste” i nie pokazuje, jak radziłoby sobie
+z błędami; klasy z regułami na wąskich obszarach (R6, R7) mają najmniej przykładów.

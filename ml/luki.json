@@ -1,0 +1,309 @@
+{
+  "opis": "Wejścia, dla których silnik nie ustalił celu (brak reguły).",
+  "liczba": 30,
+  "kombinacje": [
+    "programowanie | macOS | budzet<3500"
+  ],
+  "przypadki": [
+    {
+      "sample_id": 61,
+      "budzet": 3400,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 83,
+      "budzet": 3400,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 125,
+      "budzet": 3200,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 177,
+      "budzet": 3300,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 206,
+      "budzet": 2200,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 245,
+      "budzet": 2900,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 373,
+      "budzet": 3100,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 489,
+      "budzet": 2700,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 522,
+      "budzet": 3300,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 545,
+      "budzet": 3000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 601,
+      "budzet": 2000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 614,
+      "budzet": 2900,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 740,
+      "budzet": 2900,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 805,
+      "budzet": 2000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 875,
+      "budzet": 3000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 878,
+      "budzet": 2500,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1056,
+      "budzet": 3100,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1068,
+      "budzet": 2400,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1116,
+      "budzet": 3000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1127,
+      "budzet": 2100,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1165,
+      "budzet": 3300,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1185,
+      "budzet": 2600,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1219,
+      "budzet": 2500,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1255,
+      "budzet": 2500,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1273,
+      "budzet": 3300,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1392,
+      "budzet": 2900,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1515,
+      "budzet": 2000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "stacjonarna",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1558,
+      "budzet": 2000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1644,
+      "budzet": 2300,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    },
+    {
+      "sample_id": 1898,
+      "budzet": 3000,
+      "zastosowanie": "programowanie",
+      "mobilnosc": "wysoka",
+      "system_os": "macOS",
+      "slad": [
+        "P1"
+      ]
+    }
+  ]
+}

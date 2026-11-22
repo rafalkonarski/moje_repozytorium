@@ -1,0 +1,58 @@
+{
+  "baza": "wiedza/moja_dziedzina.json",
+  "seed": 42,
+  "losowania": 2000,
+  "probkowanie": {
+    "budzet": "równomiernie z [2000, 12000] co 100 PLN",
+    "zastosowanie": "równomiernie z biuro_studia/programowanie/grafika_3d",
+    "mobilnosc": "równomiernie z wysoka/stacjonarna",
+    "system_os": "równomiernie z Windows/macOS/Linux"
+  },
+  "wiersze": 1970,
+  "unikalne_wejscia": 1200,
+  "luki": 30,
+  "szum_etykiet": 0.0,
+  "cechy_X": [
+    "budzet",
+    "zastosowanie",
+    "mobilnosc",
+    "system_os"
+  ],
+  "etykieta_y": "laptop",
+  "klasy": {
+    "APPLE_MACBOOK_AIR_M2": 363,
+    "APPLE_MACBOOK_PRO_14": 257,
+    "ASUS_PROART_STUDIOBOOK": 249,
+    "LENOVO_THINKPAD_E14": 180,
+    "DELL_XPS_13": 119,
+    "ACER_ASPIRE_7": 106,
+    "THINKPAD_P14S": 104,
+    "ASUS_ROG_ZEPHYRUS_G14": 98,
+    "LENOVO_LEGION_SLIM_5": 98,
+    "DELL_LATITUDE_5540": 95,
+    "ASUS_ZENBOOK_14": 78,
+    "APPLE_MACBOOK_AIR_M1": 60,
+    "ACER_SWIFT_3": 54,
+    "LENOVO_IDEAPAD_3": 51,
+    "HP_250_G9": 33,
+    "DELL_VOSTRO_3520": 25
+  },
+  "unikalne_wejscia_na_klase": {
+    "APPLE_MACBOOK_AIR_M2": 222,
+    "APPLE_MACBOOK_PRO_14": 160,
+    "ASUS_PROART_STUDIOBOOK": 151,
+    "LENOVO_THINKPAD_E14": 107,
+    "DELL_XPS_13": 72,
+    "LENOVO_LEGION_SLIM_5": 64,
+    "THINKPAD_P14S": 63,
+    "ASUS_ROG_ZEPHYRUS_G14": 61,
+    "ACER_ASPIRE_7": 59,
+    "DELL_LATITUDE_5540": 58,
+    "ASUS_ZENBOOK_14": 45,
+    "APPLE_MACBOOK_AIR_M1": 37,
+    "LENOVO_IDEAPAD_3": 34,
+    "ACER_SWIFT_3": 33,
+    "HP_250_G9": 18,
+    "DELL_VOSTRO_3520": 16
+  }
+}
