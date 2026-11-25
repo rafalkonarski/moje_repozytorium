@@ -1,6 +1,6 @@
 # System doboru laptopa roboczego i studenckiego
 
-System ekspertowy regułowy — zadanie Z2 z przedmiotu Inżynieria wiedzy i maszynowe uczenie.
+System ekspertowy regułowy — zadania Z2–Z4 z przedmiotu Inżynieria wiedzy i maszynowe uczenie.
 Wiedza jest zapisana w `wiedza/moja_dziedzina.json`, a silnik wnioskujący w `se/silnik.py`
 (wnioskowanie w przód i wstecz).
 
@@ -73,7 +73,22 @@ python ml/podzial.py     # ml/podzial.json (identyfikatory testu, zamknięty do 
 python ml/trening.py     # ml/drzewo.txt, ml/drzewo.png
 ```
 
-Wymagane pakiety: `numpy pandas scikit-learn matplotlib`.
+Pakiety: `pip install -r requirements.txt` (numpy, pandas, scikit-learn, matplotlib, streamlit).
+
+### Słownik danych `ml/dane.csv`
+
+| Kolumna | Znaczenie | Typ | Dozwolone wartości | Rola |
+|---|---|---|---|---|
+| `sample_id` | identyfikator przypadku (numer losowania) | liczba | 1 … 2000 | identyfikator |
+| `budzet` | maksymalny budżet użytkownika [PLN] | liczba | 2000 … 12000, co 100 | cecha X |
+| `zastosowanie` | główne zastosowanie laptopa | tekst | biuro_studia, programowanie, grafika_3d | cecha X |
+| `mobilnosc` | wymagana mobilność | tekst | wysoka, stacjonarna | cecha X |
+| `system_os` | preferowany system operacyjny | tekst | Windows, macOS, Linux | cecha X |
+| `laptop` | decyzja silnika (cel bazy) | tekst | 16 modeli z `wiedza/moja_dziedzina.json` | etykieta y |
+| `label_source` | źródło etykiety | tekst | rule_engine | metadane |
+
+Metadane generowania (ziarno, sposób próbkowania, liczności klas, szum) są w `ml/metadane.json`,
+parametry podziału i liczności trening/test w `ml/podzial.json`.
 
 **Dane.** Generator losuje 2000 wejść (ziarno 42): budżet równomiernie z 2000–12000 PLN co 100 PLN,
 zastosowanie, mobilność i system równomiernie z wartości w bazie. Etykietę `laptop` ustala silnik
@@ -84,9 +99,14 @@ decyzji trafiło do `ml/luki.json` — wszystkie to znana luka: programowanie + 
 **X i y.** X = `budzet, zastosowanie, mobilnosc, system_os` (tylko dane od użytkownika).
 Wniosek pośredni `klasa_sprzetu`, `sample_id` i `label_source` nie trafiają do X (przeciek).
 
-**Podział.** `StratifiedGroupKFold(5, shuffle=True, random_state=42)`, fold 0 = test (394 przypadki,
+**Podział.** `StratifiedGroupKFold(5, shuffle=True, random_state=42)`, test = jeden fold (394 przypadki,
 20%), trening 1576. Grupa = identyczna kombinacja wejść, więc powtórzenia są zawsze w jednej części.
-Każda klasa ma przypadki w obu częściach (min. 5 w teście).
+Każda klasa ma przypadki w obu częściach (min. 5 w teście), a udział testu w każdej klasie to 19–21%.
+StratifiedGroupKFold wyrównuje liczbę wierszy, a nie liczbę grup: w foldzie 0 cała klasa HP_250_G9
+w teście (7 przypadków) była jednym wejściem wylosowanym 7 razy. Dlatego `podzial.py` sprawdza
+wszystkie 5 foldów i jako test bierze ten, w którym najsłabiej reprezentowana klasa ma najwięcej
+unikalnych wejść (fold 1: min. 3 unikalne wejścia na klasę, HP_250_G9 — 4). Kryterium patrzy tylko
+na skład danych, nie na wyniki modelu, więc nie powoduje przecieku.
 
 **Drzewo.** `Pipeline(OneHotEncoder(handle_unknown="ignore") na cechach symbolicznych, budżet bez zmian
 → DecisionTreeClassifier(criterion="entropy", max_depth=8, random_state=42))`, `fit` tylko na treningu.

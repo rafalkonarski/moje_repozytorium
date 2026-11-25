@@ -13,13 +13,13 @@
 |   |   |   |   |   |--- class: LENOVO_IDEAPAD_3
 |   |   |--- budzet >  3450.0
 |   |   |   |--- zastosowanie_programowanie <= 0.5
-|   |   |   |   |--- system_os_Linux <= 0.5
+|   |   |   |   |--- system_os_Windows <= 0.5
 |   |   |   |   |   |--- system_os_macOS <= 0.5
-|   |   |   |   |   |   |--- class: ASUS_ZENBOOK_14
+|   |   |   |   |   |   |--- class: LENOVO_THINKPAD_E14
 |   |   |   |   |   |--- system_os_macOS >  0.5
 |   |   |   |   |   |   |--- class: APPLE_MACBOOK_AIR_M1
-|   |   |   |   |--- system_os_Linux >  0.5
-|   |   |   |   |   |--- class: LENOVO_THINKPAD_E14
+|   |   |   |   |--- system_os_Windows >  0.5
+|   |   |   |   |   |--- class: ASUS_ZENBOOK_14
 |   |   |   |--- zastosowanie_programowanie >  0.5
 |   |   |   |   |--- mobilnosc_wysoka <= 0.5
 |   |   |   |   |   |--- class: DELL_LATITUDE_5540
@@ -37,10 +37,10 @@
 |   |--- zastosowanie_biuro_studia <= 0.5
 |   |   |--- system_os_macOS <= 0.5
 |   |   |   |--- zastosowanie_grafika_3d <= 0.5
-|   |   |   |   |--- system_os_Windows <= 0.5
-|   |   |   |   |   |--- class: THINKPAD_P14S
-|   |   |   |   |--- system_os_Windows >  0.5
+|   |   |   |   |--- system_os_Linux <= 0.5
 |   |   |   |   |   |--- class: DELL_XPS_13
+|   |   |   |   |--- system_os_Linux >  0.5
+|   |   |   |   |   |--- class: THINKPAD_P14S
 |   |   |   |--- zastosowanie_grafika_3d >  0.5
 |   |   |   |   |--- class: ASUS_PROART_STUDIOBOOK
 |   |   |--- system_os_macOS >  0.5

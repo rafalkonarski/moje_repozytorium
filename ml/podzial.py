@@ -22,7 +22,18 @@ df = pd.read_csv(KATALOG / "dane.csv")
 grupy = df[CECHY].astype(str).agg("|".join, axis=1)
 
 sgkf = StratifiedGroupKFold(n_splits=N_SPLITS, shuffle=True, random_state=SEED)
-idx_trening, idx_test = next(sgkf.split(df, df[CEL], groups=grupy))
+# StratifiedGroupKFold wyrównuje liczbę WIERSZY klas, a nie liczbę grup: przy powtórzonych
+# wejściach mała klasa może dostać w teście jedno wejście powtórzone kilka razy.
+# Dlatego sprawdzamy wszystkie foldy i jako test bierzemy ten, w którym najsłabiej
+# reprezentowana klasa ma najwięcej NIEZALEŻNYCH (unikalnych) wejść. Kryterium patrzy
+# tylko na skład danych, nie na wyniki modelu, więc nie ma tu przecieku.
+def min_unikalnych(idx):
+    czesc = df.iloc[idx]
+    return grupy.iloc[idx].groupby(czesc[CEL].values).nunique().min()
+
+foldy = list(sgkf.split(df, df[CEL], groups=grupy))
+NR_FOLDU = max(range(N_SPLITS), key=lambda k: min_unikalnych(foldy[k][1]))  # remis -> pierwszy
+idx_trening, idx_test = foldy[NR_FOLDU]
 
 trening, test = df.iloc[idx_trening], df.iloc[idx_test]
 assert not set(grupy.iloc[idx_trening]) & set(grupy.iloc[idx_test]), "przeciek: ta sama grupa w obu częściach"
@@ -35,7 +46,7 @@ tabela = pd.DataFrame({
 }).fillna(0).astype(int).sort_values("przypadki", ascending=False)
 
 podzial = {
-    "metoda": f"StratifiedGroupKFold(n_splits={N_SPLITS}, shuffle=True, random_state={SEED}); fold 0 = test",
+    "metoda": f"StratifiedGroupKFold(n_splits={N_SPLITS}, shuffle=True, random_state={SEED}); test = fold {NR_FOLDU} (najwięcej unikalnych wejść najmniejszej klasy w teście)",
     "grupa": "identyczna kombinacja wejść: " + ", ".join(CECHY),
     "warstwowanie": CEL,
     "test_size": round(len(test) / len(df), 3),

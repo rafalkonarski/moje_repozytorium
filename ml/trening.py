@@ -22,10 +22,9 @@ SEED = 42
 meta = json.loads((KATALOG / "metadane.json").read_text(encoding="utf-8"))
 podzial = json.loads((KATALOG / "podzial.json").read_text(encoding="utf-8"))
 CECHY, CEL = meta["cechy_X"], meta["etykieta_y"]
-SYMB = ["zastosowanie", "mobilnosc", "system_os"]
-LICZB = [c for c in CECHY if c not in SYMB]  # budzet
-
 df = pd.read_csv(KATALOG / "dane.csv")
+# typ cechy z danych: liczby (budżet) bez zmian, tekst (zastosowanie, mobilność, system) -> one-hot
+SYMB = [c for c in CECHY if not pd.api.types.is_numeric_dtype(df[c])]
 trening = df[~df["sample_id"].isin(set(podzial["test_sample_id"]))]
 X_train, y_train = trening[CECHY], trening[CEL]  # tylko wejścia; bez sample_id, label_source i wniosków
 
@@ -36,7 +35,7 @@ kod = ColumnTransformer(
 model = Pipeline([
     ("kod", kod),
     ("drzewo", DecisionTreeClassifier(criterion="entropy", max_depth=8,
-                                      min_samples_leaf=1, random_state=SEED)),
+                                      random_state=SEED)),
 ])
 model.fit(X_train, y_train)            # fit tylko na treningu
 
